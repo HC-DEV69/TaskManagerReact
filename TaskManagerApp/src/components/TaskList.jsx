@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useTasks } from "../context/TaskContext.jsx";
 import TaskItem from "./TaskItem.jsx";
 
-function TaskList({ filter }) {
+function TaskList({ filter , search}) {
 
     const { state } = useTasks();
 
@@ -28,6 +28,13 @@ function TaskList({ filter }) {
 
     }, [state.tasks, filter]);
 
+    const searchedTasks = useMemo(() =>{
+        return filteredTasks.filter(
+
+            task=> task.title.toLowerCase().includes(search.toLowerCase())
+
+        )}, [filteredTasks, search] )
+
     return (
         <section className="task-list">
 
@@ -41,7 +48,7 @@ function TaskList({ filter }) {
 
             ) : (
 
-                filteredTasks.map(task => (
+                searchedTasks.map(task => (
 
                     <TaskItem
                         key={task.id}

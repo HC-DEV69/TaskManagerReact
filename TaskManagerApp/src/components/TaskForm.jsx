@@ -1,14 +1,26 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useTasks } from "../context/TaskContext.jsx";
 
 function TaskForm() {
 
-    const { dispatch } = useTasks();
+    const { state, dispatch } = useTasks();
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [priority, setPriority] = useState("Medium");
     const [assignee, setAssignee] = useState("");
+
+    useEffect(() => {
+
+        if(state.currentTask){
+
+            setTitle(state.currentTask.title),
+            setDescription(state.currentTask.description),
+            setPriority(state.currentTask.priority),
+            setAssignee(state.currentTask.assignee)
+        }
+    }, [state.currentTask])
+
 
     const handleSubmit = useCallback((event) => {
 

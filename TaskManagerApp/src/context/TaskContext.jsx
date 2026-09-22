@@ -21,7 +21,8 @@ const initialState = {
             assignee: "Rahul",
             completed: true
         }
-    ]
+    ],
+    currentTask: null
 }
 
 function taskReducer(state, action){
@@ -59,6 +60,16 @@ function taskReducer(state, action){
                         completed : !task.completed
                     }
                     : task
+                )
+            };
+
+        case "SET_CURRENT_TASK" :
+
+            return {
+                ...state,
+                currentTask: action.payload,
+                tasks: state.tasks.filter(
+                    task => task.id !== action.payload.id
                 )
             };
         

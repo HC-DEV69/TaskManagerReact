@@ -14,6 +14,15 @@ function TaskItem({ task }) {
 
     }, [dispatch, task.id]);
 
+    const editTask = useCallback(() => {
+
+        dispatch({
+            type: "SET_CURRENT_TASK",
+            payload: task
+        });
+
+    }, [dispatch, task]);
+
     const deleteTask = useCallback(() => {
 
         dispatch({
@@ -58,6 +67,13 @@ function TaskItem({ task }) {
                         ? "Undo"
                         : "Complete"}
 
+                </button>
+
+                <button
+                    className="edit"
+                    onClick={editTask}
+                >
+                    Edit
                 </button>
 
                 <button

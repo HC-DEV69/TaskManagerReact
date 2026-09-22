@@ -4,10 +4,13 @@ import TaskForm from "./components/TaskForm.jsx";
 import Statistics from "./components/Statistics.jsx";
 import FilterBar from "./components/FilterBar.jsx";
 import TaskList from "./components/TaskList.jsx";
+import SearchBar from "./components/SearchBar.jsx";
 
 function App() {
 
     const [filter, setFilter] = useState("all");
+    const[search, setSearch ] = useState("");
+    
 
     return (
         <div className="app">
@@ -20,9 +23,11 @@ function App() {
 
                 <TaskForm />
 
+                <SearchBar setSearch={setSearch}/>
+
                 <FilterBar filter={filter} setFilter={setFilter} />
 
-                <TaskList filter={filter}/>
+                <TaskList filter={filter} search={search}/>
 
             </main>
 
