@@ -100,23 +100,33 @@ button {
 
 }
 
-.filter-bar {
+.filters{
+    display: flex;
+    justify-content: space-between;
+}
+
+.filter-bar, .priority-bar{
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
 }
 
-.filter-bar button {
+.filter-bar button,.priority-bar button {
     background: #6b7280;
 }
 
-.filter-bar button.active {
+.filter-bar button.active,.priority-bar button.active {
     background: #2563eb;
 }
 
 .task-list h2 {
     margin-bottom: 15px;
 }
+
+
+
+
+
 
 .task-card {
     background: white;

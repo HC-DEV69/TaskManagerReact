@@ -5,10 +5,12 @@ import Statistics from "./components/Statistics.jsx";
 import FilterBar from "./components/FilterBar.jsx";
 import TaskList from "./components/TaskList.jsx";
 import SearchBar from "./components/SearchBar.jsx";
+import PriorityFilter from "./components/PriorityFilter.jsx";
 
 function App() {
 
     const [filter, setFilter] = useState("all");
+    const [priority, setPriority] = useState("all")
     const[search, setSearch ] = useState("");
     
 
@@ -25,9 +27,16 @@ function App() {
 
                 <SearchBar setSearch={setSearch}/>
 
+                <div className="filters">
+
                 <FilterBar filter={filter} setFilter={setFilter} />
 
-                <TaskList filter={filter} search={search}/>
+                <PriorityFilter priority={priority} setPriority={setPriority}></PriorityFilter>
+
+                </div>
+
+
+                <TaskList filter={filter} search={search} priority={priority} />
 
             </main>
 
