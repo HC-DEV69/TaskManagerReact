@@ -2,11 +2,10 @@ import { useMemo } from "react";
 import { useTasks } from "../context/TaskContext.jsx";
 import TaskItem from "./TaskItem.jsx";
 
-function TaskList({ filter , priority,search}) {
+function TaskList({ filter , priority, search, sortBy}) {
 
     const { state } = useTasks();
 
-    console.log(state.tasks[0])
 
     const filteredTasks = useMemo(() => {
 
@@ -70,6 +69,36 @@ function TaskList({ filter , priority,search}) {
 
         )}, [priorityTasks, search] )
 
+    const sortedTasks = useMemo(() =>{
+
+        const tasksCopy = [...searchedTasks];
+
+        if(sortBy === "newest"){
+
+            return tasksCopy.sort((a,b)=> b.id - a.id)
+
+        }
+
+        if(sortBy === "oldest"){
+
+            return tasksCopy.sort((a,b)=> a.id - b.id)
+
+        }
+
+        if(sortBy === "high priority"){
+            const priorityRank = {high : 0, medium : 1, low : 2};
+            return tasksCopy.sort((a,b)=>priorityRank[a.priority.toLowerCase()] - priorityRank[b.priority.toLowerCase()])
+
+        }
+
+        if(sortBy === "alphabetical"){
+            return tasksCopy.sort((a,b)=> a.title.localeCompare(b.title));
+        }
+
+        return tasksCopy;        
+
+    }, [searchedTasks, sortBy] )
+
     return (
         <section className="task-list">
 
@@ -83,7 +112,7 @@ function TaskList({ filter , priority,search}) {
 
             ) : (
 
-                searchedTasks.map(task => (
+                sortedTasks.map(task => (
 
                     <TaskItem
                         key={task.id}

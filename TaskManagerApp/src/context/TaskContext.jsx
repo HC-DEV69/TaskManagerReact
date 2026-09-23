@@ -21,6 +21,15 @@ const initialState = {
             assignee: "Rahul",
             completed: true
         }
+        ,
+        {
+            id: 3,
+            title: "Test the Functionality",
+            description: "Test the features and UI of the Taskmanager App",
+            priority: "High",
+            assignee: "Rahul",
+            completed: false
+        }
     ],
     currentTask: null
 }

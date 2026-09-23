@@ -119,6 +119,16 @@ button {
     background: #2563eb;
 }
 
+.sort-filter{
+    display: flex;
+    justify-content: end;
+}
+
+.sort-filter select{
+    max-width: 14vw;
+    
+}
+
 .task-list h2 {
     margin-bottom: 15px;
 }

@@ -6,12 +6,14 @@ import FilterBar from "./components/FilterBar.jsx";
 import TaskList from "./components/TaskList.jsx";
 import SearchBar from "./components/SearchBar.jsx";
 import PriorityFilter from "./components/PriorityFilter.jsx";
+import SortFilter from "./components/SortFilter.jsx"
 
 function App() {
 
     const [filter, setFilter] = useState("all");
-    const [priority, setPriority] = useState("all")
-    const[search, setSearch ] = useState("");
+    const [priority, setPriority] = useState("all");
+    const [search, setSearch ] = useState("");
+    const [sortBy, setSort] = useState("oldest");
     
 
     return (
@@ -35,8 +37,10 @@ function App() {
 
                 </div>
 
+                <SortFilter sortBy={sortBy} setSort={setSort}></SortFilter>
 
-                <TaskList filter={filter} search={search} priority={priority} />
+
+                <TaskList filter={filter} search={search} priority={priority} sortBy={sortBy} />
 
             </main>
 
