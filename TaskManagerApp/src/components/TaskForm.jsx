@@ -8,7 +8,9 @@ function TaskForm() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [priority, setPriority] = useState("Medium");
-    const [assignee, setAssignee] = useState("");
+    const [assignee, setAssignee] = useState("");   
+
+    
 
     useEffect(() => {
 
@@ -31,26 +33,52 @@ function TaskForm() {
             return;
         }
 
+        const dueDate = new Date();
+        dueDate.setDate(dueDate.getDate() + 5);
+
+    
+        if(state.currentTask){
+
+            const updatedTask = {
+
+                ...state.currentTask,
+                title,
+                description,
+                priority,
+                assignee
+            };
+            dispatch({ type: "UPDATE_TASK", payload: updatedTask});
+            
+        }
+
+        else{
+
+
         const newTask = {
             id: Date.now(),
             title,
             description,
             priority,
             assignee,
-            completed: false
-        };
+            completed: false,
+            dueOn : dueDate.toLocaleDateString()
+        };        
 
         dispatch({
             type: "ADD_TASK",
             payload: newTask
         });
 
+    }
+
         setTitle("");
         setDescription("");
         setPriority("Medium");
         setAssignee("");
 
-    }, [title, description, priority, assignee, dispatch]);
+    }, [title, description, priority, assignee, dispatch, state.currentTask]);
+
+    
 
     return (
         <section className="card">
@@ -89,7 +117,7 @@ function TaskForm() {
                 />
 
                 <button type="submit">
-                    Add Task
+                    {state.currentTask ? "Save Changes" : "Add Task"}
                 </button>
 
             </form>

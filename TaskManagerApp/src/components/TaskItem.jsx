@@ -55,7 +55,18 @@ function TaskItem({ task }) {
                         Assigned: {task.assignee}
                     </span>
 
-                </div>
+                </div>     
+
+                <div className="gap"></div>
+
+                <div className="task-info">
+
+
+                 <span>
+                    Due Date: {task.dueOn}
+                 </span>
+
+                </div>               
 
             </div>
 

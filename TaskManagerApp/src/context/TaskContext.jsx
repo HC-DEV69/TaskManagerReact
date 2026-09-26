@@ -2,6 +2,12 @@ import { createContext, useContext, useReducer } from 'react';
 
 const TaskContext = createContext();
 
+const date = new Date();
+
+const dueDate = new Date();
+
+dueDate.setDate(date.getDate() + 5);
+
 const initialState = {
 
     tasks: [
@@ -11,7 +17,8 @@ const initialState = {
             description: "Build task management application",
             priority: "High",
             assignee: "Sumit",
-            completed: false
+            completed: false,
+            dueOn: dueDate.toLocaleDateString()
         },
         {
             id: 2,
@@ -19,7 +26,8 @@ const initialState = {
             description: "Practice joins and subqueries",
             priority: "Medium",
             assignee: "Rahul",
-            completed: true
+            completed: true,
+            dueOn: dueDate.toLocaleDateString()
         }
         ,
         {
@@ -28,7 +36,8 @@ const initialState = {
             description: "Test the features and UI of the Taskmanager App",
             priority: "High",
             assignee: "Rahul",
-            completed: false
+            completed: false,
+            dueOn: dueDate.toLocaleDateString()
         }
     ],
     currentTask: null
@@ -76,10 +85,17 @@ function taskReducer(state, action){
 
             return {
                 ...state,
-                currentTask: action.payload,
-                tasks: state.tasks.filter(
-                    task => task.id !== action.payload.id
-                )
+                currentTask: action.payload
+            };
+
+        case "UPDATE_TASK":
+
+            return {
+                ...state,
+                tasks: state.tasks.map(
+                    task=> task.id === action.payload.id ? action.payload : task
+                ),
+                currentTask : null
             };
         
         default : 

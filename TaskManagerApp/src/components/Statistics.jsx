@@ -57,6 +57,7 @@ function Statistics() {
                 <p>High Priority</p>
             </div>
 
+
             <div className="stat">
                 <h3>{statistics.completionPercentage}%</h3>
                 <p>Completion</p>
