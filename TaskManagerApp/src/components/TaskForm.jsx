@@ -21,6 +21,13 @@ function TaskForm() {
             setPriority(state.currentTask.priority),
             setAssignee(state.currentTask.assignee)
         }
+        else{
+        
+            setTitle("");
+            setDescription("");
+            setPriority("Medium");
+            setAssignee("");
+        }
     }, [state.currentTask])
 
 
@@ -78,6 +85,17 @@ function TaskForm() {
 
     }, [title, description, priority, assignee, dispatch, state.currentTask]);
 
+    const handleCancel = () =>{
+
+        setTitle("");
+        setDescription("");
+        setPriority("Medium");
+        setAssignee("");
+
+        dispatch({ type : "CLEAR_CURRENT_TASK"});
+        
+    } 
+
     
 
     return (
@@ -119,6 +137,10 @@ function TaskForm() {
                 <button type="submit">
                     {state.currentTask ? "Save Changes" : "Add Task"}
                 </button>
+
+                {state.currentTask && (
+                        <button type="button" onClick={handleCancel}>Cancel</button>
+                )}
 
             </form>
 

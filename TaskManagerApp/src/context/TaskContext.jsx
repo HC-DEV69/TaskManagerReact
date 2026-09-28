@@ -64,6 +64,7 @@ function taskReducer(state, action){
                 tasks: state.tasks.filter(
                     task => task.id !== action.payload
                 )
+                , currentTask: null
                 
             };
 
@@ -97,6 +98,13 @@ function taskReducer(state, action){
                 ),
                 currentTask : null
             };
+        
+        case "CLEAR_CURRENT_TASK" :
+
+            return {
+                ...state,
+                currentTask : null
+            }
         
         default : 
                 return state;
